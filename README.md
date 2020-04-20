@@ -206,3 +206,44 @@ $ az batch task file download `
  --file-path stdout.txt `
  --destination ./stdout0.txt
 ```
+
+# Manage App Service Web App
+
+## Command:
+
+```
+$ az webapp
+```
+
+## Basic actions:
+
+| Command    | Description                                           |
+| ---------- | ----------------------------------------------------- |
+| create     | Create a web app resource.                            |
+| deployment | Show me the information of certain pool               |
+| config     | List all the files created for that task              |
+
+## Examples:
+
+1. Create a web app group called `mywebapp` in the resource group called `playground` and with the app service plan created before calle `myfreeserviceplan`.
+
+```
+$ az webapp create -n "mywebapp" -g "playground" --plan "myfreeserviceplan"
+```
+
+2. Deploy to my web app called `mywebapp` in the resource group called `playground` the code that have in github `https://github.com/cesiztel/azure-cli-hero` based on the master branch and I will manually triggered.
+
+```
+$ az webapp deployment source config `
+    -n "mywebapp" `
+    -g "playground" `
+    --repo-url "https://github.com/cesiztel/azure-cli-hero" `
+    --branch "master" `
+    --manual-integration
+```
+
+3. Sync all the code configure with my git repo and master branch for the web app called `mywebapp` in the resource group called `playground
+
+```
+$ az webapp deployment source sync -n "mywebapp" -g "playground"
+```
