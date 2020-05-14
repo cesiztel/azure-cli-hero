@@ -1,6 +1,19 @@
+# 💪🏼 Azure CLI hero.
+
+We love the CLI 💙. Cheatsheet with the most common Microsoft Azure CLI commands with examples. 
+
+Each section covers one specific set of resources you can manage with your CLI. Per each section you will find the following information:
+
+- **Title**: The resources set name that you can manage with the CLI
+- **Command**: Remember this one. It's the basic thing to start. For instance, `az group` is all about manage resource groups.
+- **Basic actions**: Basic actions you can do in the command. Tip: mentally join command and basic action and you will be at half way to use the CLI to manage the resource.
+- **Examples**: Set of examples using that command and the basic actions. First, it is described in human expression what you want to perform and the line after, the command that perform the action. Try to link the way of thinking and the sequence of the command and you will never forget a command again. 
+
+Note: In the examples is assumed that all the actions are based on your subscription account.
+
 # Manage Resouce Groups
 
-## Based command:
+## Command:
 
 ```
 $ az group
@@ -17,12 +30,7 @@ $ az group
 | show        | Gets a resource group..          |
 
 
-## Human thinking usage:
-
-Why? Do not study or memorize all the parameters. Instead, try to think how
-you would use the commands with actions and then the parameters will come later.
-
-Note: we assume that all the actions are based on your subscription account.
+## Examples
 
 1. Create a resource group called `playground` in `northeurope`
 ```
@@ -47,7 +55,7 @@ $ az group delete -n "playground" -y
 
 # Manage Storage accounts
 
-## Based command:
+## Command:
 
 ```
 $ az storage account 
@@ -63,7 +71,7 @@ $ az storage account
 | list        | List resource groups.             |
 | show        | Gets a resource group..           |
 
-## Human thinking usage:
+## Examples
 
 1. Create a storage account group called `mystorageaccount` in the resource group called `playground`, in the location `northeurope` and with store-keeping unit `Standard_LRS`
 
@@ -73,7 +81,7 @@ $ az storage account create -n "mystorageaccount" -g "playground" -l "northeurop
 
 # Manage Batch accounts
 
-## Based account command:
+## Command:
 
 ```
 $ az batch account 
@@ -86,7 +94,7 @@ $ az batch account
 | create      | Create a new batch account.                           |
 | login       | Specify which batch account the CLI should wotj with. |
 
-## Based batch pool command:
+## Pool command:
 
 ```
 $ az batch pool 
@@ -100,7 +108,7 @@ $ az batch pool
 | show        | Show me the information of certain pool               |
 | delete      | Delete a pool                                         |
 
-## Based batch job command:
+## Job command:
 
 ```
 $ az batch job 
@@ -113,7 +121,7 @@ $ az batch job
 | create      | Create a new pool.                                    |
 | show        | Show me the information of certain pool               |
 
-## Based batch task command:
+## Task command:
 
 ```
 $ az batch task 
@@ -129,7 +137,7 @@ $ az batch task
 | file download   | Download files created for that task              |
 
 
-## Human thinking usage:
+## Examples:
 
 1. Create a batch account group called `mybatchaccount` in the storage account called `mystorageaccount`in the resource group called `playground` and in the location `northeurope`.
 
@@ -221,3 +229,43 @@ $ az aks
 $ az aks create -n "mykubercluster" -g "playground" --node-count 1 --generate-ssh-keys
 ```
 
+# Manage App Service Web App
+
+## Command:
+
+```
+$ az webapp
+```
+
+## Basic actions:
+
+| Command    | Description                                           |
+| ---------- | ----------------------------------------------------- |
+| create     | Create a web app resource.                            |
+| deployment | Show me the information of certain pool               |
+| config     | List all the files created for that task              |
+
+## Examples:
+
+1. Create a web app group called `mywebapp` in the resource group called `playground` and with the app service plan created before calle `myfreeserviceplan`.
+
+```
+$ az webapp create -n "mywebapp" -g "playground" --plan "myfreeserviceplan"
+```
+
+2. Deploy to my web app called `mywebapp` in the resource group called `playground` the code that have in github `https://github.com/cesiztel/azure-cli-hero` based on the master branch and I will manually triggered.
+
+```
+$ az webapp deployment source config `
+    -n "mywebapp" `
+    -g "playground" `
+    --repo-url "https://github.com/cesiztel/azure-cli-hero" `
+    --branch "master" `
+    --manual-integration
+```
+
+3. Sync all the code configure with my git repo and master branch for the web app called `mywebapp` in the resource group called `playground
+
+```
+$ az webapp deployment source sync -n "mywebapp" -g "playground"
+```
