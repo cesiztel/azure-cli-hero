@@ -198,3 +198,26 @@ $ az batch task file download `
  --file-path stdout.txt `
  --destination ./stdout0.txt
 ```
+
+# Manage AKS
+
+## Basic actions:
+
+| Command     | Description                                           |
+| ----------- | ----------------------------------------------------- |
+| create      | Create a new ask kluster.                             |
+
+## Based batch task command:
+
+```
+$ az aks 
+```
+
+## Human thinking usage:
+
+1. Create an AKS cluster called `mykubercluster` in the resource group called `playground` with one node (VM) and create in my local machine the ssh keys to access to it.
+
+```
+$ az aks create -n "mykubercluster" -g "playground" --node-count 1 --generate-ssh-keys
+```
+
